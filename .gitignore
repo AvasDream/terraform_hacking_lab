@@ -1,0 +1,6 @@
+/.terraform
+/secrets
+*.tfstate
+
+*.backup
+*_key
