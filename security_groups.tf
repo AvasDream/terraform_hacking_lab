@@ -7,15 +7,16 @@ resource "aws_security_group" "allow_connections_hacking_lab" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = formatlist("%s/32", list(chomp(data.http.external_ip.body)))
+    cidr_blocks = concat(formatlist("%s/32", list(chomp(data.http.external_ip.body))), var.ip_whitelist)
   }
+  /* DVWA */
   ingress {
     from_port   = 81
     to_port     = 81
     protocol    = "tcp"
-    cidr_blocks = formatlist("%s/32", list(chomp(data.http.external_ip.body)))
+    cidr_blocks = concat(formatlist("%s/32", list(chomp(data.http.external_ip.body))), var.ip_whitelist)
   }
-
+  /* Hackazon */
   tags = {
     Name = "allow_connections_hacking_lab"
   }
