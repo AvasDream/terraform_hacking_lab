@@ -9,6 +9,13 @@ resource "aws_security_group" "allow_connections_hacking_lab" {
     protocol    = "tcp"
     cidr_blocks = concat(formatlist("%s/32", list(chomp(data.http.external_ip.body))), var.ip_whitelist)
   }
+  /* Hackazon */
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = concat(formatlist("%s/32", list(chomp(data.http.external_ip.body))), var.ip_whitelist)
+  }
   /* DVWA */
   ingress {
     from_port   = 81
@@ -16,7 +23,13 @@ resource "aws_security_group" "allow_connections_hacking_lab" {
     protocol    = "tcp"
     cidr_blocks = concat(formatlist("%s/32", list(chomp(data.http.external_ip.body))), var.ip_whitelist)
   }
-  /* Hackazon */
+  /* Juice Shop */
+  ingress {
+    from_port   = 82
+    to_port     = 82
+    protocol    = "tcp"
+    cidr_blocks = concat(formatlist("%s/32", list(chomp(data.http.external_ip.body))), var.ip_whitelist)
+  }
   tags = {
     Name = "allow_connections_hacking_lab"
   }

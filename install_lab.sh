@@ -1,6 +1,7 @@
 #!/bin/bash
-apt update >> /home/ubuntu/hello.txt
-apt install docker.io -y >> /home/ubuntu/hello.txt
-systemctl enable docker >> /home/ubuntu/hello.txt
-docker run --rm -d -p 81:80 vulnerables/web-dvwa >> /home/ubuntu/hello.txt
-echo "Hello World" > /home/ubuntu/hello.txt >> /home/ubuntu/hello.txt
+apt update 
+apt install docker.io git -y 
+systemctl enable docker 
+docker run --rm --name hackazon -p 80:80 -d mutzel/all-in-one-hackazon:postinstall supervisord -n
+docker run --rm --name dvwa -d -p 81:80 vulnerables/web-dvwa 
+docker run --rm --name juice-shop -p 82:3000 -d bkimminich/juice-shop
