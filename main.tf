@@ -7,7 +7,7 @@ data "template_file" "install_script" {
 }
 resource "aws_instance" "hacking-lab-server" {
   ami                    = "${data.aws_ami.ubuntu.id}"
-  instance_type          = "t2.large"
+  instance_type          = "${var.instance_type}"
   vpc_security_group_ids = ["${aws_security_group.allow_connections_hacking_lab.id}"]
   /* Specify SSH Key Name for login */
   key_name = "${var.ssh_key_name}"
