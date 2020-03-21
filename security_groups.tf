@@ -30,6 +30,13 @@ resource "aws_security_group" "allow_connections_hacking_lab" {
     protocol    = "tcp"
     cidr_blocks = concat(formatlist("%s/32", list(chomp(data.http.external_ip.body))), var.ip_whitelist)
   }
+  /* Shellshock */
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = concat(formatlist("%s/32", list(chomp(data.http.external_ip.body))), var.ip_whitelist)
+  }
   tags = {
     Name = "allow_connections_hacking_lab"
   }
